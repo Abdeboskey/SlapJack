@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis&:display=swap');
+
+html,
+body {
+  width: 100%;
+  height: 101%;
+  background-image: linear-gradient(to bottom right, #7400b8, #80ffdb );
+  color: white;
+  font-family: 'Dosis', sans-serif;
+}
+
+header {
+  height: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5vw;
+}
+
+main {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+img {
+  object-fit: cover;
+  height: 27vw;
+  width: 18vw;
+  border-radius: 10px;
+  box-shadow: 0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.player-1-deck {
+  box-shadow: -0.3em -0.3em 1em #80ffdb;
+}
+
+.player-2-deck {
+  box-shadow: 0.3em 0.3em 1em #7400b8;
+}
+
+p {
+  text-align: center;
+  font-size: 2vw;
+}
+
+.player-1-wins {
+  color: #80ffdb;
+}
+
+.player-2-wins {
+  color: #7400b8;
+}
