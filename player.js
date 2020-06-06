@@ -7,8 +7,8 @@ class Player {
   }
 
   playCard() {
-    game.middleDeck.push(this.hand.pop());
-    console.log(game.middleDeck[game.middleDeck.length -1]);
+    currentGame.middleDeck.push(this.hand.pop());
+    console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
   }
 
   saveWinsToStorage() {
