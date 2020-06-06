@@ -18,9 +18,17 @@ class Game {
       var card = deck[pickACard];
       if (!shuffled.includes(card)) {
           shuffled.push(card);
-          console.log(shuffled.length + ") " + card);
       }
     }
     deck = shuffled;
+    // console.log(deck);
+    this.allCards = shuffled;
+    // console.log(this.allCards);
+  }
+
+  deal() {
+    this.shuffle(this.allCards);
+    this.player1.hand = this.allCards.slice(0, 26);
+    this.player2.hand = this.allCards.slice(26, 52);
   }
 }
