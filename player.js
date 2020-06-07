@@ -6,7 +6,7 @@ class Player {
   }
 
   playCard() {
-    this.checkHands();
+    // this.checkHands();
     if (currentGame.currentTurn === this.id) {
       currentGame.middleDeck.push(this.hand.pop());
       console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
@@ -16,19 +16,25 @@ class Player {
     }
   }
 
-  checkHands() {
-    if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 2)) {
-      currentGame.takeThePile(currentGame.player1);
-      currentGame.currentTurn = 1;
-    } else if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 1)) {
-      currentGame.takeThePile(currentGame.player2);
-      currentGame.currentTurn = 2;
-    } else if (currentGame.player1.hand === []) {
-      currentGame.currentTurn = 2;
-    } else if (currentGame.player2.hand === []) {
-      currentGame.currentTurn = 1;
-    }
-  }
+  // checkHands() {
+  //   if (this.hand === []) {
+  //     this.takeTurns();
+  //   }
+  // }
+  //
+  // sheckHands() {
+  //   if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 2)) {
+  //     currentGame.takeThePile(currentGame.player1);
+  //     currentGame.currentTurn = 1;
+  //   } else if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 1)) {
+  //     currentGame.takeThePile(currentGame.player2);
+  //     currentGame.currentTurn = 2;
+  //   } else if (currentGame.player1.hand === []) {
+  //     currentGame.currentTurn = 2;
+  //   } else if (currentGame.player2.hand === []) {
+  //     currentGame.currentTurn = 1;
+  //   }
+  // }
 
   takeTurns() {
     if (this.id === 1) {
