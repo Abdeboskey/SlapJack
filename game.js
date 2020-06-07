@@ -51,8 +51,7 @@ class Game {
     } else if (topCard === "ck") {
       this.slapJack(playerNum);
     } else if (topCard === doubles) {
-      this.takeThePile(playerNum);
-      console.log(`DOUBLES! Player ${playerNum.id} takes the pile!`);
+      this.doubles(playerNum);
     } else if (topCard === sandwich) {
       this.takeThePile(playerNum);
       console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
@@ -75,6 +74,13 @@ class Game {
   closeCall(playerNum) {
     this.takeThePile(playerNum);
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
+  }
+
+  
+
+  doubles() {
+    this.takeThePile(playerNum);
+    console.log(`DOUBLES! Player ${playerNum.id} takes the pile!`);
   }
 
   slapJack(playerNum) {
