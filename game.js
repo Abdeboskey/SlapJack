@@ -57,4 +57,10 @@ class Game {
     if (playerNum.id === 1) {this.player2.hand.unshift(this.player1.hand.pop())};
     if (playerNum.id === 2) {this.player1.hand.unshift(this.player2.hand.pop())};
   }
+
+  takeThePile(playerNum) {
+    playerNum.hand.push(...this.middleDeck);
+    this.middleDeck = [];
+    this.shuffle(playerNum.hand);
+  }
 }
