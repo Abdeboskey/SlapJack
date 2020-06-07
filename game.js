@@ -2,6 +2,7 @@ class Game {
   constructor() {
     this.player1 = new Player(1);
     this.player2 = new Player(2);
+    this.currentTurn = 1;
     this.middleDeck = [];
     this.allCards = [
       "blue-01", "blue-02", "blue-03", "blue-04", "blue-05", "blue-06", "blue-07", "blue-08", "blue-09", "blue-10", "blue-jack", "blue-queen", "blue-king",
@@ -13,17 +14,16 @@ class Game {
 
   shuffle(deck) {
     var shuffled = [];
+    var pickACard;
+    var card;
     while (shuffled.length < deck.length) {
-      var pickACard = Math.floor(Math.random() * deck.length);
-      var card = deck[pickACard];
+      pickACard = Math.floor(Math.random() * deck.length);
+      card = deck[pickACard];
       if (!shuffled.includes(card)) {
           shuffled.push(card);
       }
     }
-    deck = shuffled;
-    // console.log(deck);
-    this.allCards = shuffled;
-    // console.log(this.allCards);
+    deck.splice(0, (deck.length), ...shuffled);
   }
 
   deal() {
