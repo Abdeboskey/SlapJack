@@ -6,7 +6,7 @@ class Player {
   }
 
   playCard() {
-    // this.checkHands();
+    this.checkHands();
     if (currentGame.currentTurn === this.id) {
       currentGame.middleDeck.push(this.hand.pop());
       console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
@@ -17,24 +17,27 @@ class Player {
   }
 
   // checkHands() {
-  //   if (this.hand === []) {
+  //   if (this.hand.length === 0) {
   //     this.takeTurns();
   //   }
   // }
-  //
-  // sheckHands() {
-  //   if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 2)) {
-  //     currentGame.takeThePile(currentGame.player1);
-  //     currentGame.currentTurn = 1;
-  //   } else if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 1)) {
-  //     currentGame.takeThePile(currentGame.player2);
-  //     currentGame.currentTurn = 2;
-  //   } else if (currentGame.player1.hand === []) {
-  //     currentGame.currentTurn = 2;
-  //   } else if (currentGame.player2.hand === []) {
-  //     currentGame.currentTurn = 1;
-  //   }
-  // }
+
+  checkHands() {
+    if ((currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) && (currentGame.currentTurn === 2)) {
+      currentGame.takeThePile(currentGame.player1);
+      currentGame.currentTurn = 1;
+    } else if ((currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) && (currentGame.currentTurn === 1)) {
+      currentGame.takeThePile(currentGame.player2);
+      currentGame.currentTurn = 2;
+    } else if ((this.id === 1 && this.hand.length > 0) && (currentGame.player2.hand.length === 0)) {
+      currentGame.currentTurn = 1;
+    } else if ((this.id === 2 && this.hand.length > 0) && (currentGame.player1.hand.length === 0)) {
+      currentGame.currentTurn = 2;
+    } else if (this.hand.length === 0) {
+      console.log("You are out of cards.")
+      this.takeTurns();
+    }
+  }
 
   takeTurns() {
     if (this.id === 1) {
