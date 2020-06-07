@@ -130,12 +130,6 @@ class Game {
     }
   }
 
-  checkMiddleDeck() {
-    if (this.middleDeck === []) {
-      return true;
-    }
-  }
-
   closeCall(playerNum) {
     this.takeThePile(playerNum);
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
