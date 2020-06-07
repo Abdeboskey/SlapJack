@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  height: 15vw;
+  height: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@ main {
 
 img {
   object-fit: cover;
-  height: 27vw;
+  height: 26.75vw;
   width: 18vw;
   border-radius: 10px;
   box-shadow: 0.3em 0.3em 1em rgba(0,0,0,0.3);
