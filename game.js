@@ -23,7 +23,7 @@ class Game {
           shuffled.push(card);
       }
     }
-    deck.splice(0, (deck.length), ...shuffled);
+    deck.splice(0, deck.length, ...shuffled);
   }
 
   deal() {
@@ -38,19 +38,42 @@ class Game {
     var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
     var doubles = this.middleDeck[this.middleDeck.length -2].slice(-2);
     var sandwich = this.middleDeck[this.middleDeck.length -3].slice(-2);
-    if (topCard === "ck") {
-      takeThePile.(playerNum);
-      console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`)
+    if (suddenDeath(playerNum) && topCard === "ck") {
+      this.takeThePile(playerNum);
+      console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
+    } else if (suddenDeath(playerNum) && topCard !== "ck") {
+      playerNum.wins ++;
+      console.log(`Player ${playerNum} wins the game!`);
+    } else if (topCard === "ck") {
+      this.slapJack(playerNum);
     } else if (topCard === doubles) {
-      takeThePile.(playerNum);
+      this.takeThePile(playerNum);
       console.log(`DOUBLES! Player ${playerNum.id} takes the pile!`);
     } else if (topCard === sandwich) {
-      takeThePile.(playerNum);
+      this.takeThePile(playerNum);
       console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
     } else {
-      invalidSlap(playerNum);
-      console.log(`INVALID SLAP! Player ${playerNum.id} loses a card!`)
+      this.invalidSlap(playerNum);
+        if (playerNum.id === 1) {
+        console.log(`BAD SLAP! Player 1 forfeits a card to Player 2!`)
+      } else if (playerNum.id === 2) {
+        console.log(`BAD SLAP! Player 2 forfeits a card to Player 1!`)
+      }
     }
+  }
+
+  closeCall(playerNum) {
+    this.takeThePile(playerNum);
+    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
+  }
+
+  slapJack(playerNum) {
+    this.takeThePile(playerNum);
+    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`);
+  }
+
+  suddenDeath(playerNum) {
+    if (this.playerNum.hand === []) {return true};
   }
 
   invalidSlap(playerNum) {
