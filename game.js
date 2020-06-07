@@ -20,7 +20,7 @@ class Game {
       pickACard = Math.floor(Math.random() * deck.length);
       card = deck[pickACard];
       if (!shuffled.includes(card)) {
-          shuffled.push(card);
+        shuffled.push(card);
       }
     }
     deck.splice(0, deck.length, ...shuffled);
@@ -42,11 +42,12 @@ class Game {
     //   console.log(`There's nothin to slap, Player ${playerNum}`);
     //   return;
     // }
-    if (this.suddenDeath(playerNum) && topCard === "ck") {
-      this.closeCall(playerNum);
-    } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
-      this.youLose(playerNum);
-    } else if (topCard === "ck") {
+    // if (this.suddenDeath(playerNum) && topCard === "ck") {
+    //   this.closeCall(playerNum);
+    // } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
+    //   this.youLose(playerNum);
+    /*} else */
+      if (topCard === "ck") {
       this.slapJack(playerNum);
     } else if (topCard === doubles) {
       this.doubles(playerNum);
@@ -62,7 +63,7 @@ class Game {
     }
   }
 
-  youLose() {
+  youLose(playerNum) {
     if (playerNum.id === 1) {
       this.player2.wins ++;
       console.log("Player 2 wins the game!");
@@ -83,12 +84,16 @@ class Game {
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
   }
 
-  sandwich() {
+  suddenDeath(playerNum) {
+    if (playerNum.hand === []) {return true};
+  }
+
+  sandwich(playerNum) {
     this.takeThePile(playerNum);
     console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
   }
 
-  doubles() {
+  doubles(playerNum) {
     this.takeThePile(playerNum);
     console.log(`DOUBLES! Player ${playerNum.id} takes the pile!`);
   }
@@ -96,10 +101,6 @@ class Game {
   slapJack(playerNum) {
     this.takeThePile(playerNum);
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`);
-  }
-
-  suddenDeath(playerNum) {
-    if (playerNum.hand === []) {return true};
   }
 
   invalidSlap(playerNum) {
