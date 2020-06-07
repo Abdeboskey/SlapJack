@@ -52,4 +52,9 @@ class Game {
       console.log(`INVALID SLAP! Player ${playerNum.id} loses a card!`)
     }
   }
+
+  invalidSlap(playerNum) {
+    if (playerNum.id === 1) {this.player2.hand.unshift(this.player1.hand.pop())};
+    if (playerNum.id === 2) {this.player1.hand.unshift(this.player2.hand.pop())};
+  }
 }
