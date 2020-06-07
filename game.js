@@ -35,10 +35,10 @@ class Game {
   }
 
   slapCard(playerNum) {
-    if (playerNum.hand.length > 0) {
-      this.regularGameplay(playerNum);
-    } else if (this.suddenDeath(playerNum)) {
+    if (this.suddenDeath()) {
       this.endGameplay(playerNum);
+    } else if (playerNum.hand.length > 0) {
+      this.regularGameplay(playerNum);
     }
   }
 
@@ -61,18 +61,17 @@ class Game {
       this.slapSuddenDeath(playerNum);
     }
   }
-  // if (this.suddenDeath(playerNum) && topCard === "ck") {
-    //   this.closeCall(playerNum);
-    // } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
-      //   this.youLose(playerNum);
-      // }
 
   slapSuddenDeath(playerNum) {
     var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
-    if (topCard === "ck") {
+    if (playerNum.hand.length === 0 && topCard === "ck") {
       this.closeCall(playerNum);
-    } else {
+    } else if (playerNum.hand.length === 0 && topCard !== "ck") {
       this.youLose(playerNum);
+    } else if (playerNum.hand.length > 0 && topCard === "ck") {
+      this.youWin(playerNum);
+    } else if (playerNum.hand.length > 0 && topCard !== "ck") {
+      this.invalidSlap(playerNum);
     }
   }
 
@@ -116,6 +115,11 @@ class Game {
     }
   }
 
+  youWin(playerNum) {
+    playerNum.wins++;
+    console.log(`Player ${playerNum.id} wins the game!`);
+  }
+
   youLose(playerNum) {
     if (playerNum.id === 1) {
       this.player2.wins++;
@@ -137,8 +141,8 @@ class Game {
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
   }
 
-  suddenDeath(playerNum) {
-    if (playerNum.hand.length === 0) {return true};
+  suddenDeath() {
+    if (this.player1.hand.length === 0 || this.player2.hand.length === 0) {return true};
   }
 
   sandwich(playerNum) {
