@@ -35,11 +35,13 @@ class Game {
   }
 
   slapCard(playerNum) {
-    if (this.playerNum.hand > 0) {
+    if (playerNum.hand.length > 0) {
       this.regularGameplay(playerNum);
+    } else if (this.suddenDeath(playerNum)) {
+      this.endGameplay(playerNum);
     }
   }
-  
+
   regularGameplay(playerNum) {
     if (this.middleDeck.length === 0) {
       this.slapNone();
@@ -50,29 +52,29 @@ class Game {
     } else if (this.middleDeck.length > 2) {
       this.slapThree(playerNum);
     }
-    // var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
-    // var doubles = this.middleDeck[this.middleDeck.length -2].slice(-2);
-    // var sandwich = this.middleDeck[this.middleDeck.length -3].slice(-2);
-    // // if (this.checkMiddleDeck()) {
-    // //   console.log(`There's nothin to slap, Player ${playerNum}`);
-    // //   return;
-    // // }
-    // // if (this.suddenDeath(playerNum) && topCard === "ck") {
-    // //   this.closeCall(playerNum);
-    // // } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
-    // //   this.youLose(playerNum);
-    // /*} else */
-    //   if (topCard === "ck") {
-    //   this.slapJack(playerNum);
-    // } else if (topCard === doubles) {
-    //   this.doubles(playerNum);
-    // } else if (topCard === sandwich) {
-    //   this.sandwich(playerNum);
-    // } else {
-    //   this.invalidSlap(playerNum);
-    // }
   }
 
+  endGameplay(playerNum) {
+    if (this.middleDeck.length === 0) {
+      this.slapNone();
+    } else {
+      this.slapSuddenDeath(playerNum);
+    }
+  }
+  // if (this.suddenDeath(playerNum) && topCard === "ck") {
+    //   this.closeCall(playerNum);
+    // } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
+      //   this.youLose(playerNum);
+      // }
+
+  slapSuddenDeath(playerNum) {
+    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
+    if (topCard === "ck") {
+      this.closeCall(playerNum);
+    } else {
+      this.youLose(playerNum);
+    }
+  }
 
   slapNone() {
     console.log(`There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`);
@@ -116,11 +118,11 @@ class Game {
 
   youLose(playerNum) {
     if (playerNum.id === 1) {
-      this.player2.wins ++;
-      console.log("Player 2 wins the game!");
+      this.player2.wins++;
+      console.log("BAD SLAP! Player 2 wins the game!");
     } else if (playerNum.id === 2) {
-      this.player1.wins ++;
-      console.log("Player 1 wins the game!");
+      this.player1.wins++;
+      console.log("BAD SLAP! Player 1 wins the game!");
     }
   }
 
@@ -136,7 +138,7 @@ class Game {
   }
 
   suddenDeath(playerNum) {
-    if (playerNum.hand === []) {return true};
+    if (playerNum.hand.length === 0) {return true};
   }
 
   sandwich(playerNum) {
