@@ -28,7 +28,28 @@ class Game {
 
   deal() {
     this.shuffle(this.allCards);
+    this.shuffle(this.allCards);
+    this.shuffle(this.allCards);
     this.player1.hand = this.allCards.slice(0, 26);
     this.player2.hand = this.allCards.slice(26, 52);
+  }
+
+  slapCard(playerNum) {
+    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
+    var doubles = this.middleDeck[this.middleDeck.length -2].slice(-2);
+    var sandwich = this.middleDeck[this.middleDeck.length -3].slice(-2);
+    if (topCard === "ck") {
+      takeThePile.(playerNum);
+      console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`)
+    } else if (topCard === doubles) {
+      takeThePile.(playerNum);
+      console.log(`DOUBLES! Player ${playerNum.id} takes the pile!`);
+    } else if (topCard === sandwich) {
+      takeThePile.(playerNum);
+      console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
+    } else {
+      invalidSlap(playerNum);
+      console.log(`INVALID SLAP! Player ${playerNum.id} loses a card!`)
+    }
   }
 }
