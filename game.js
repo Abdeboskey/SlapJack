@@ -43,18 +43,15 @@ class Game {
     //   return;
     // }
     if (this.suddenDeath(playerNum) && topCard === "ck") {
-      this.takeThePile(playerNum);
-      console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
+      this.closeCall(playerNum);
     } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
-      playerNum.wins ++;
-      console.log(`Player ${playerNum} wins the game!`);
+      this.youLose(playerNum);
     } else if (topCard === "ck") {
       this.slapJack(playerNum);
     } else if (topCard === doubles) {
       this.doubles(playerNum);
     } else if (topCard === sandwich) {
-      this.takeThePile(playerNum);
-      console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
+      this.sandwich(playerNum);
     } else {
         this.invalidSlap(playerNum);
         if (playerNum.id === 1) {
@@ -62,6 +59,16 @@ class Game {
       } else if (playerNum.id === 2) {
         console.log(`BAD SLAP! Player 2 forfeits a card to Player 1!`)
       }
+    }
+  }
+
+  youLose() {
+    if (playerNum.id === 1) {
+      this.player2.wins ++;
+      console.log("Player 2 wins the game!");
+    } else if (playerNum.id === 2) {
+      this.player1.wins ++;
+      console.log("Player 1 wins the game!");
     }
   }
 
@@ -76,7 +83,10 @@ class Game {
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
   }
 
-  
+  sandwich() {
+    this.takeThePile(playerNum);
+    console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
+  }
 
   doubles() {
     this.takeThePile(playerNum);
