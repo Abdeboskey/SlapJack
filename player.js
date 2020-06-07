@@ -6,6 +6,7 @@ class Player {
   }
 
   playCard() {
+    this.checkHands();
     if (currentGame.currentTurn === this.id) {
       currentGame.middleDeck.push(this.hand.pop());
       console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
@@ -13,6 +14,18 @@ class Player {
     } else {
       console.log(`It is player ${currentGame.currentTurn}'s turn`)
     }
+  }
+
+  checkHands() {
+    if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 2) {
+      currentGame.takeThePile(currentGame.player1);
+    } else if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 1) {
+      currentGame.takeThePile(currentGame.player2);
+    } else if (currentGame.player1.hand === []) {
+      currentGame.currentTurn = 2;
+    } else if (currentGame.player2.hand === []) {
+      currentGame.currentTurn = 1};
+    }  
   }
 
   takeTurns() {
