@@ -17,15 +17,17 @@ class Player {
   }
 
   checkHands() {
-    if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 2) {
+    if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 2)) {
       currentGame.takeThePile(currentGame.player1);
-    } else if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 1) {
+      currentGame.currentTurn = 1;
+    } else if ((currentGame.player1.hand === [] && currentGame.player2.hand === []) && (currentGame.currentTurn === 1)) {
       currentGame.takeThePile(currentGame.player2);
+      currentGame.currentTurn = 2;
     } else if (currentGame.player1.hand === []) {
       currentGame.currentTurn = 2;
     } else if (currentGame.player2.hand === []) {
-      currentGame.currentTurn = 1};
-    }  
+      currentGame.currentTurn = 1;
+    }
   }
 
   takeTurns() {
