@@ -22,6 +22,7 @@ function clickWhat(event) {
 }
 
 function whichKey(event) {
+  gameplayMessage.innerText = "";
   if (event.keyCode === 81) {player1Play()};
   if (event.keyCode === 80) {player2Play()};
   if (event.keyCode === 70) {
@@ -33,10 +34,12 @@ function whichKey(event) {
 }
 
 function player1Play() {
+  var image =
   gameplayMessage.innerText = currentGame.player1.playCard();
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
   showElement("middle-deck");
   addP1Shadow();
+  if (currentGame.middleDeck.length === 0) {toggleElement("middle-deck")};
 }
 
 function player2Play() {
@@ -44,6 +47,7 @@ function player2Play() {
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
   showElement("middle-deck");
   addP2Shadow();
+  if (currentGame.middleDeck.length === 0) {toggleElement("middle-deck")};
 }
 
 function addP1Shadow() {
@@ -52,8 +56,8 @@ function addP1Shadow() {
 }
 
 function addP2Shadow() {
-  document.querySelector(".middle-deck").classList.add("player-2-shadow");
-  document.querySelector(".middle-deck").classList.remove("player-1-shadow");
+  document.getElementById("play-card").classList.add("player-2-shadow");
+  document.getElementById("play-card").classList.remove("player-1-shadow");
 }
 
 function toggleElement(className) {
