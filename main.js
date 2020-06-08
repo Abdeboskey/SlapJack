@@ -94,6 +94,7 @@ function resetGame() {
   currentGame.player2.hand = [];
   currentGame.middleDeck = [];
   currentGame.deal();
+  currentGame.currentTurn = 1;
   gameplayMessage.innerText = "Player 1, press 'p' to start a new game!";
 }
 
