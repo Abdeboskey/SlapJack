@@ -16,12 +16,6 @@ class Player {
     }
   }
 
-  // checkHands() {
-  //   if (this.hand.length === 0) {
-  //     this.takeTurns();
-  //   }
-  // }
-
   checkHands() {
     if ((currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) && (currentGame.currentTurn === 2)) {
       currentGame.takeThePile(currentGame.player1);
