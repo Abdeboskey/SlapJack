@@ -28,11 +28,11 @@ function whichKey(event) {
 
 function whosTurn(pNum) {
   if (currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) {
-    gameplayMessage.innerText = `Player ${pNum}, you are out of cards.\nPlayer ${pNum}, it is your turn again`;
+    gameplayMessage.innerText = `Player ${pNum}, you ran out of cards.\nTake the pile Player ${pNum}, it is your turn again`;
   } else if (currentGame.player1.hand.length === 0) {
-    gameplayMessage.innerText = "Player 1, you are out of cards.\nPlayer 2, it is your turn";
+    gameplayMessage.innerText = "Player 1, you are out of cards. Only a Jack will save you now!\nPlayer 2, it is your turn";
   } else if (currentGame.player2.hand.length === 0) {
-    gameplayMessage.innerText = "Player 2, you are out of cards.\nPlayer 1, it is your turn";
+    gameplayMessage.innerText = "Player 2, you are out of cards. Only a Jack will save you now!\nPlayer 1, it is your turn";
   }
 }
 
