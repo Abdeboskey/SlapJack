@@ -38,19 +38,19 @@ class Game {
     if (this.suddenDeath()) {
       this.endGameplay(playerNum);
     } else if (playerNum.hand.length > 0) {
-      this.regularGameplay(playerNum);
+      return this.regularGameplay(playerNum);
     }
   }
 
   regularGameplay(playerNum) {
     if (this.middleDeck.length === 0) {
-      this.slapNone();
+      return this.slapNone();
     } else if (this.middleDeck.length === 1) {
-      this.slapOne(playerNum);
+      return this.slapOne(playerNum);
     } else if (this.middleDeck.length === 2) {
-      this.slapTwo(playerNum);
+      return this.slapTwo(playerNum);
     } else if (this.middleDeck.length > 2) {
-      this.slapThree(playerNum);
+      return this.slapThree(playerNum);
     }
   }
 
@@ -77,6 +77,7 @@ class Game {
 
   slapNone() {
     console.log(`There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`);
+    return `There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`
   }
 
   slapOne(playerNum) {
