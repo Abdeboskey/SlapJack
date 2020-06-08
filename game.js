@@ -36,7 +36,7 @@ class Game {
 
   slapCard(playerNum) {
     if (this.suddenDeath()) {
-      this.endGameplay(playerNum);
+      return this.endGameplay(playerNum);
     } else if (playerNum.hand.length > 0) {
       return this.regularGameplay(playerNum);
     }
