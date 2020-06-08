@@ -10,16 +10,16 @@ var currentGame = new Game;
 
 // window.onload(getFromStorage)
 window.onload = currentGame.deal();
-window.addEventListener("click", clickWhat);
 window.addEventListener("keydown", whichKey);
+// window.addEventListener("click", clickWhat);
 
-function clickWhat(event) {
-  var startGameBtn = document.querySelector(".start-game");
-  // var playAgainBtn = document.querySelector();
-  if (event.target === startGameBtn) {
-
-  }
-}
+// function clickWhat(event) {
+//   var startGameBtn = document.querySelector(".start-game");
+//   // var playAgainBtn = document.querySelector();
+//   if (event.target === startGameBtn) {
+//
+//   }
+// }
 
 function whichKey(event) {
   gameplayMessage.innerText = "";
@@ -27,14 +27,24 @@ function whichKey(event) {
   if (event.keyCode === 80) {player2Play()};
   if (event.keyCode === 70) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player1);
+    // can message persist for a set amount of time?
   }
   if (event.keyCode === 74) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player2);
   }
 }
 
+function gameOver() {
+  // Winner message persists and keys stop working
+  // Player Wins are updated and saved to storage
+  // Button appears to start new game and reset page
+}
+
+function getFromStorage() {
+  
+}
+
 function player1Play() {
-  var image =
   gameplayMessage.innerText = currentGame.player1.playCard();
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
   showElement("middle-deck");
