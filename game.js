@@ -119,7 +119,7 @@ class Game {
   youWin(playerNum) {
     playerNum.wins++;
     console.log(`Player ${playerNum.id} wins the game!`);
-    playerNum.saveWinsToStorage(playerNum);
+    playerNum.saveWinsToStorage(`Player ${playerNum.id}`);
     return `Player ${playerNum.id} wins the game!`;
   }
 
