@@ -45,6 +45,6 @@ class Player {
 
   saveWinsToStorage(playerNum) {
     var wins = JSON.stringify(this.wins);
-    localStorage.setItem(`${playerNum} Wins`, wins);
+    localStorage.setItem(`${playerNum}Wins`, wins);
   }
 }
