@@ -20,12 +20,11 @@ function whichKey(event) {
     if (currentGame.player2.hand.length === 0) {gameplayMessage.innerText = "Player 2, you are out of cards.\nPlayer 1, it is your turn"};
   } else if (event.keyCode === 70) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player1);
-    takeASecond();
+    isItOver();
   } else if (event.keyCode === 74) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player2);
-    takeASecond();
+    isItOver();
   }
-  isItOver();
 }
 
 function takeASecond() {
@@ -35,11 +34,17 @@ function takeASecond() {
     resume++;
     if (resume > 1) {
       clearInterval(pause);
-      window.addEventListener("keydown", whichKey);
-      gameplayMessage.innerText += `\nPlayer ${currentGame.currentTurn}, it is your turn`;
+      afterSlap();
     }
   }, 1000);
+}
+
+function afterSlap() {
+  window.addEventListener("keydown", whichKey);
   checkDeck();
+  if (!gameplayMessage.innerText.includes("wins the game")) {
+  gameplayMessage.innerText += `\nPlayer ${currentGame.currentTurn}, it is your turn`;
+  }
 }
 
 function checkDeck() {
@@ -51,14 +56,30 @@ function checkDeck() {
 function isItOver() {
   if (gameplayMessage.innerText.includes("wins the game")) {
     gameOver();
+  } else {
+    takeASecond();
   }
 }
 
 function gameOver() {
   console.log("GAME OVER");
-  // Winner message persists and keys stop working
+  window.removeEventListener("keydown", whichKey);
+  gameOverFanciness();
   // Player Wins are updated and saved to storage
-  // Button appears to start new game and reset page
+}
+
+function gameOverFanciness() {
+  var reset = 0;
+  var fancyColors = setInterval(function () {
+    reset++
+    document.querySelector(".body").classList.add("celebrate");
+    if (reset > 10) {
+      clearInterval(fancyColors);
+      window.addEventListener("keydown", whichKey);
+      document.querySelector(".body").classList.remove("celebrate");
+      resetGame();
+    }
+  }, 1000);
 }
 
 function resetGame() {
