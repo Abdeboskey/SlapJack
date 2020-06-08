@@ -23,13 +23,16 @@ window.addEventListener("keydown", whichKey);
 
 function whichKey(event) {
   gameplayMessage.innerText = "";
-  if (event.keyCode === 81) {player1Play()};
-  if (event.keyCode === 80) {player2Play()};
-  if (event.keyCode === 70) {
+  if (event.keyCode === 81) {
+    player1Play();
+    if (currentGame.player1.hand.length === 0) {gameplayMessage.innerText = "You are out of cards.\nPlayer 2, it is your turn"};
+  } else if (event.keyCode === 80) {
+    player2Play();
+    if (currentGame.player2.hand.length === 0) {gameplayMessage.innerText = "You are out of cards.\nPlayer 1, it is your turn"};
+  } else if (event.keyCode === 70) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player1);
     // can message persist for a set amount of time?
-  }
-  if (event.keyCode === 74) {
+  } else if (event.keyCode === 74) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player2);
   }
 }
