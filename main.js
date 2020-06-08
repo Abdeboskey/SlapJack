@@ -24,6 +24,12 @@ function clickWhat(event) {
 function whichKey(event) {
   if (event.keyCode === 81) {player1Play()};
   if (event.keyCode === 80) {player2Play()};
+  if (event.keyCode === 70) {
+    gameplayMessage.innerText = currentGame.slapCard(currentGame.player1);
+  }
+  if (event.keyCode === 74) {
+    gameplayMessage.innerText = currentGame.slapCard(currentGame.player2);
+  }
 }
 
 function player1Play() {
