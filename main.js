@@ -11,10 +11,10 @@ window.addEventListener("keydown", whichKey);
 function whichKey(event) {
   if (event.keyCode === 81) {
     player1Play();
-    if (currentGame.player1.hand.length === 0) {gameplayMessage.innerText = "Player 1, you are out of cards.\nPlayer 2, it is your turn"};
+    whosTurn(1);
   } else if (event.keyCode === 80) {
     player2Play();
-    if (currentGame.player2.hand.length === 0) {gameplayMessage.innerText = "Player 2, you are out of cards.\nPlayer 1, it is your turn"};
+    whosTurn(2);
   } else if (event.keyCode === 70) {
     gameplayMessage.innerText = "";
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player1);
@@ -23,6 +23,16 @@ function whichKey(event) {
     gameplayMessage.innerText = "";
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player2);
     isItOver();
+  }
+}
+
+function whosTurn(pNum) {
+  if (currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) {
+    gameplayMessage.innerText = `Player ${pNum}, you are out of cards.\nPlayer ${pNum}, it is your turn again`;
+  } else if (currentGame.player1.hand.length === 0) {
+    gameplayMessage.innerText = "Player 1, you are out of cards.\nPlayer 2, it is your turn";
+  } else if (currentGame.player2.hand.length === 0) {
+    gameplayMessage.innerText = "Player 2, you are out of cards.\nPlayer 1, it is your turn";
   }
 }
 
