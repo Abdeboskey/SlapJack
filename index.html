@@ -6,15 +6,19 @@
     </head>
     <body>
         <header>
-            <h1>SLAPJACK! Player 1 takes the pile!</h1>
+            <h1 class="gameplay-message">
+              Player 1: "q" = play a card, "f" = slap. Player 2: "p" = play a card, "j" = slap.</br>
+              Player 1, press "q" to start the game!
+            </h1>
         </header>
         <main>
             <section>
                 <img class="player-1-deck" src="assets/back.png" alt="Image of circular graphic on back of card">
                 <p class="player-1-wins">2 Wins</p>
             </section>
-            <section class="slap-deck">
-                <img src="assets/gold-jack.png" alt="Face of card that was last played">
+            <section class="middle-deck hidden">
+                <img id="play-card" src="assets/gold-jack.png" alt="Face of card that was last played">
+                <button class="start-game hidden">Let's Get Slappin</button>
             </section>
             <section>
                 <img class="player-2-deck" src="assets/back.png" alt="Image of circular graphic on back of card">

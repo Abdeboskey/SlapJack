@@ -11,8 +11,10 @@ class Player {
       currentGame.middleDeck.push(this.hand.pop());
       console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
       this.takeTurns();
+      return "";
     } else {
       console.log(`It is player ${currentGame.currentTurn}'s turn`)
+      return `It is player ${currentGame.currentTurn}'s turn`;
     }
   }
 
@@ -41,8 +43,8 @@ class Player {
     }
   }
 
-  saveWinsToStorage() {
+  saveWinsToStorage(playerNum) {
     var wins = JSON.stringify(this.wins);
-    localStorage.setItem("Games Won", wins);
+    localStorage.setItem(`${playerNum} Wins`, wins);
   }
 }
