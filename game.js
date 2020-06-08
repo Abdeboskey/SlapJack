@@ -118,15 +118,18 @@ class Game {
   youWin(playerNum) {
     playerNum.wins++;
     console.log(`Player ${playerNum.id} wins the game!`);
+    playerNum.saveWinsToStorage();
   }
 
   youLose(playerNum) {
     if (playerNum.id === 1) {
       this.player2.wins++;
       console.log("BAD SLAP! Player 2 wins the game!");
+      this.player2.saveWinsToStorage();
     } else if (playerNum.id === 2) {
       this.player1.wins++;
       console.log("BAD SLAP! Player 1 wins the game!");
+      this.player1.saveWinsToStorage();
     }
   }
 
