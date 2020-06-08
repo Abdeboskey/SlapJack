@@ -9,6 +9,18 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
+/* body {
+   animation: colorrr 10s infinite
+}
+@keyframes colorrr {
+   0% {
+     filter: hue-rotate(0deg)
+   }
+   50% {
+     filter: hue-rotate(360deg)
+   }
+} */
+
 header {
   height: 14vw;
   display: flex;
