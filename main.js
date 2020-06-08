@@ -1,10 +1,12 @@
+var player1Wins = document.querySelector(".player-1-wins");
+var player2Wins = document.querySelector(".player-2-wins");
 var gameplayMessage = document.querySelector(".gameplay-message");
 var cardPlayed = document.getElementById("play-card");
 // var middleDeck = document.querySelector(".middleDeck");
 
 var currentGame = new Game;
 
-// window.onload(getFromStorage)
+window.onload = getFromStorage();
 window.onload = currentGame.deal();
 window.addEventListener("keydown", whichKey);
 
@@ -42,7 +44,7 @@ function afterSlap() {
   window.addEventListener("keydown", whichKey);
   checkDeck();
   if (!gameplayMessage.innerText.includes("wins the game")) {
-  gameplayMessage.innerText += `\nPlayer ${currentGame.currentTurn}, it is your turn`;
+    gameplayMessage.innerText += `\nPlayer ${currentGame.currentTurn}, it is your turn`;
   }
 }
 
@@ -65,12 +67,9 @@ function gameOver() {
   window.removeEventListener("keydown", whichKey);
   gameOverFanciness();
   updateWins();
-  // Player Wins are updated and saved to storage
 }
 
 function updateWins() {
-  var player1Wins = document.querySelector(".player-1-wins");
-  var player2Wins = document.querySelector(".player-2-wins");
   player1Wins.innerText = `${currentGame.player1.wins} Wins`;
   player2Wins.innerText = `${currentGame.player2.wins} Wins`;
 }
@@ -99,7 +98,29 @@ function resetGame() {
 }
 
 function getFromStorage() {
+  getPlayer1Wins();
+  getPlayer2Wins();
+  updateWins();
+}
 
+function getPlayer1Wins() {
+  if (localStorage.getItem("player1Wins") === null) {
+    currentGame.player1.wins = 0;
+  } else {
+    var wins = localStorage.getItem("player1Wins");
+    var winningStreak = JSON.parse(wins);
+    currentGame.player1.wins = winningStreak;
+  }
+}
+
+function getPlayer2Wins() {
+  if (localStorage.getItem("player2Wins") === null) {
+    currentGame.player2.wins = 0;
+  } else {
+    var wins = localStorage.getItem("player2Wins");
+    var winningStreak = JSON.parse(wins);
+    currentGame.player2.wins = winningStreak;
+  }
 }
 
 function player1Play() {
