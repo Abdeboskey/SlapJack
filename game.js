@@ -35,47 +35,101 @@ class Game {
   }
 
   slapCard(playerNum) {
+    if (this.suddenDeath()) {
+      this.endGameplay(playerNum);
+    } else if (playerNum.hand.length > 0) {
+      this.regularGameplay(playerNum);
+    }
+  }
+
+  regularGameplay(playerNum) {
+    if (this.middleDeck.length === 0) {
+      this.slapNone();
+    } else if (this.middleDeck.length === 1) {
+      this.slapOne(playerNum);
+    } else if (this.middleDeck.length === 2) {
+      this.slapTwo(playerNum);
+    } else if (this.middleDeck.length > 2) {
+      this.slapThree(playerNum);
+    }
+  }
+
+  endGameplay(playerNum) {
+    if (this.middleDeck.length === 0) {
+      this.slapNone();
+    } else {
+      this.slapSuddenDeath(playerNum);
+    }
+  }
+
+  slapSuddenDeath(playerNum) {
+    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
+    if (playerNum.hand.length === 0 && topCard === "ck") {
+      this.closeCall(playerNum);
+    } else if (playerNum.hand.length === 0 && topCard !== "ck") {
+      this.youLose(playerNum);
+    } else if (playerNum.hand.length > 0 && topCard === "ck") {
+      this.youWin(playerNum);
+    } else if (playerNum.hand.length > 0 && topCard !== "ck") {
+      this.invalidSlap(playerNum);
+    }
+  }
+
+  slapNone() {
+    console.log(`There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`);
+  }
+
+  slapOne(playerNum) {
+    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
+    if (topCard === "ck") {
+      this.slapJack(playerNum);
+    } else {
+      this.invalidSlap(playerNum);
+    }
+  }
+
+  slapTwo(playerNum) {
+    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
+    var doubles = this.middleDeck[this.middleDeck.length -2].slice(-2);
+    if (topCard === "ck") {
+      this.slapJack(playerNum);
+    } else if (topCard === doubles) {
+      this.doubles(playerNum);
+    } else {
+      this.invalidSlap(playerNum);
+    }
+  }
+
+  slapThree(playerNum) {
     var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
     var doubles = this.middleDeck[this.middleDeck.length -2].slice(-2);
     var sandwich = this.middleDeck[this.middleDeck.length -3].slice(-2);
-    // if (this.checkMiddleDeck()) {
-    //   console.log(`There's nothin to slap, Player ${playerNum}`);
-    //   return;
-    // }
-    // if (this.suddenDeath(playerNum) && topCard === "ck") {
-    //   this.closeCall(playerNum);
-    // } else if (this.suddenDeath(playerNum) && topCard !== "ck") {
-    //   this.youLose(playerNum);
-    /*} else */
-      if (topCard === "ck") {
+    if (topCard === "ck") {
       this.slapJack(playerNum);
     } else if (topCard === doubles) {
       this.doubles(playerNum);
     } else if (topCard === sandwich) {
       this.sandwich(playerNum);
     } else {
-        this.invalidSlap(playerNum);
-        if (playerNum.id === 1) {
-        console.log(`BAD SLAP! Player 1 forfeits a card to Player 2!`)
-      } else if (playerNum.id === 2) {
-        console.log(`BAD SLAP! Player 2 forfeits a card to Player 1!`)
-      }
+      this.invalidSlap(playerNum);
     }
+  }
+
+  youWin(playerNum) {
+    playerNum.wins++;
+    console.log(`Player ${playerNum.id} wins the game!`);
+    playerNum.saveWinsToStorage();
   }
 
   youLose(playerNum) {
     if (playerNum.id === 1) {
-      this.player2.wins ++;
-      console.log("Player 2 wins the game!");
+      this.player2.wins++;
+      console.log("BAD SLAP! Player 2 wins the game!");
+      this.player2.saveWinsToStorage();
     } else if (playerNum.id === 2) {
-      this.player1.wins ++;
-      console.log("Player 1 wins the game!");
-    }
-  }
-
-  checkMiddleDeck() {
-    if (this.middleDeck === []) {
-      return true;
+      this.player1.wins++;
+      console.log("BAD SLAP! Player 1 wins the game!");
+      this.player1.saveWinsToStorage();
     }
   }
 
@@ -84,8 +138,8 @@ class Game {
     console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
   }
 
-  suddenDeath(playerNum) {
-    if (playerNum.hand === []) {return true};
+  suddenDeath() {
+    if (this.player1.hand.length === 0 || this.player2.hand.length === 0) {return true};
   }
 
   sandwich(playerNum) {
@@ -104,8 +158,14 @@ class Game {
   }
 
   invalidSlap(playerNum) {
-    if (playerNum.id === 1) {this.player2.hand.unshift(this.player1.hand.pop())};
-    if (playerNum.id === 2) {this.player1.hand.unshift(this.player2.hand.pop())};
+    if (playerNum.id === 1) {
+      this.player2.hand.unshift(this.player1.hand.pop());
+      console.log(`BAD SLAP! Player 1 forfeits a card to Player 2!`);
+    }
+    if (playerNum.id === 2) {
+      this.player1.hand.unshift(this.player2.hand.pop());
+      console.log(`BAD SLAP! Player 2 forfeits a card to Player 1!`)
+    }
   }
 
   takeThePile(playerNum) {
