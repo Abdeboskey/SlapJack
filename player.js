@@ -11,8 +11,10 @@ class Player {
       currentGame.middleDeck.push(this.hand.pop());
       console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
       this.takeTurns();
+      return "";
     } else {
       console.log(`It is player ${currentGame.currentTurn}'s turn`)
+      return `It is player ${currentGame.currentTurn}'s turn`;
     }
   }
 
