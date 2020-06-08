@@ -159,11 +159,11 @@ class Game {
     if (playerNum.id === 1) {
       this.player2.wins++;
       this.player2.saveWinsToStorage(`player2`);
-      return "BAD SLAP! Player 2 wins the game!";
+      return "BAD SLAP Player 1! Player 2 wins the game!";
     } else if (playerNum.id === 2) {
       this.player1.wins++;
       this.player1.saveWinsToStorage(`player1`);
-      return "BAD SLAP! Player 1 wins the game!";
+      return "BAD SLAP Player 2! Player 1 wins the game!";
     }
   }
 
