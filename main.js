@@ -2,8 +2,6 @@ var player1Wins = document.querySelector(".player-1-wins");
 var player2Wins = document.querySelector(".player-2-wins");
 var gameplayMessage = document.querySelector(".gameplay-message");
 var cardPlayed = document.getElementById("play-card");
-// var middleDeck = document.querySelector(".middleDeck");
-
 var currentGame = new Game;
 
 window.onload = getFromStorage();
@@ -26,6 +24,38 @@ function whichKey(event) {
     gameplayMessage.innerText = currentGame.slapCard(currentGame.player2);
     isItOver();
   }
+}
+
+function player1Play() {
+  gameplayMessage.innerText = "";
+  if (currentGame.player1.hand.length > 0) {addP1Shadow()};
+  gameplayMessage.innerText = currentGame.player1.playCard();
+  cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
+  showElement("play-card");
+  checkDeck();
+}
+
+function player2Play() {
+  gameplayMessage.innerText = "";
+  if (currentGame.player2.hand.length > 0) {addP2Shadow()};
+  gameplayMessage.innerText = currentGame.player2.playCard();
+  cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
+  showElement("play-card");
+  checkDeck();
+}
+// Can both the above and below functions be refactored? I think they can.....
+function addP1Shadow() {
+  document.getElementById("play-card").classList.add("player-1-shadow");
+  document.getElementById("play-card").classList.remove("player-2-shadow");
+}
+
+function addP2Shadow() {
+  document.getElementById("play-card").classList.add("player-2-shadow");
+  document.getElementById("play-card").classList.remove("player-1-shadow");
+}
+
+function showElement(idName) {
+  document.getElementById(`${idName}`).classList.remove("hidden");
 }
 
 function takeASecond() {
@@ -54,6 +84,10 @@ function checkDeck() {
   }
 }
 
+function hideElement(idName) {
+  document.getElementById(`${idName}`).classList.add("hidden");
+}
+
 function isItOver() {
   if (gameplayMessage.innerText.includes("wins the game")) {
     gameOver();
@@ -69,11 +103,6 @@ function gameOver() {
   updateWins();
 }
 
-function updateWins() {
-  player1Wins.innerText = `${currentGame.player1.wins} Wins`;
-  player2Wins.innerText = `${currentGame.player2.wins} Wins`;
-}
-
 function gameOverFanciness() {
   var reset = 0;
   var fancyColors = setInterval(function () {
@@ -86,6 +115,11 @@ function gameOverFanciness() {
       resetGame();
     }
   }, 1000);
+}
+
+function updateWins() {
+  player1Wins.innerText = `${currentGame.player1.wins} Wins`;
+  player2Wins.innerText = `${currentGame.player2.wins} Wins`;
 }
 
 function resetGame() {
@@ -122,43 +156,4 @@ function getPlayer2Wins() {
     currentGame.player2.wins = winningStreak;
   }
 }
-
-function player1Play() {
-  gameplayMessage.innerText = "";
-  if (currentGame.player1.hand.length > 0) {addP1Shadow()};
-  gameplayMessage.innerText = currentGame.player1.playCard();
-  cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
-  showElement("play-card");
-  if (currentGame.middleDeck.length === 0) {hideElement("play-card")};
-}
-
-function player2Play() {
-  gameplayMessage.innerText = "";
-  if (currentGame.player2.hand.length > 0) {addP2Shadow()};
-  gameplayMessage.innerText = currentGame.player2.playCard();
-  cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
-  showElement("play-card");
-  if (currentGame.middleDeck.length === 0) {hideElement("play-card")};
-}
-
-function addP1Shadow() {
-  document.getElementById("play-card").classList.add("player-1-shadow");
-  document.getElementById("play-card").classList.remove("player-2-shadow");
-}
-
-function addP2Shadow() {
-  document.getElementById("play-card").classList.add("player-2-shadow");
-  document.getElementById("play-card").classList.remove("player-1-shadow");
-}
-
-function toggleElement(idName) {
-  document.getElementById(`${idName}`).classList.toggle("hidden");
-}
-
-function showElement(idName) {
-  document.getElementById(`${idName}`).classList.remove("hidden");
-}
-
-function hideElement(idName) {
-  document.getElementById(`${idName}`).classList.add("hidden");
-}
+// Can you refactor these two above?
