@@ -104,20 +104,20 @@ function getFromStorage() {
 
 function player1Play() {
   gameplayMessage.innerText = "";
+  if (currentGame.player1.hand.length > 0) {addP1Shadow()};
   gameplayMessage.innerText = currentGame.player1.playCard();
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
   showElement("play-card");
-  addP1Shadow();
-  if (currentGame.middleDeck.length === 0) {toggleElement("play-card")};
+  if (currentGame.middleDeck.length === 0) {hideElement("play-card")};
 }
 
 function player2Play() {
   gameplayMessage.innerText = "";
+  if (currentGame.player2.hand.length > 0) {addP2Shadow()};
   gameplayMessage.innerText = currentGame.player2.playCard();
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
   showElement("play-card");
-  addP2Shadow();
-  if (currentGame.middleDeck.length === 0) {toggleElement("play-card")};
+  if (currentGame.middleDeck.length === 0) {hideElement("play-card")};
 }
 
 function addP1Shadow() {
