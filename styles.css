@@ -31,12 +31,24 @@ img {
   box-shadow: 0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
 
+.hidden {
+  display: none;
+}
+
 .player-1-deck {
   box-shadow: -0.3em -0.3em 1em #80ffdb;
 }
 
+.player-1-shadow {
+  box-shadow: -0.4em -0.4em 1.1em #80ffdb;
+}
+
 .player-2-deck {
   box-shadow: 0.3em 0.3em 1em #7400b8;
+}
+
+.player-2-shadow {
+  box-shadow: 0.4em 0.4em 1.1em #7400b8;
 }
 
 p {
