@@ -40,6 +40,14 @@ function gameOver() {
   // Button appears to start new game and reset page
 }
 
+function resetGame() {
+  currentGame.player1.hand = [];
+  currentGame.player2.hand = [];
+  currentGame.middleDeck = [];
+  currentGame.deal();
+  gameplayMessage.innerText = "Player 1, press 'p' to start a new game!";
+}
+
 function getFromStorage() {
 
 }
