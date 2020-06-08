@@ -97,7 +97,6 @@ function isItOver() {
 }
 
 function gameOver() {
-  console.log("GAME OVER");
   window.removeEventListener("keydown", whichKey);
   gameOverFanciness();
   updateWins();
