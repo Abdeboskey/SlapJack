@@ -44,6 +44,7 @@ function player2Play() {
   checkDeck();
 }
 // Can both the above and below functions be refactored? I think they can.....
+// Perhaps just bind that cardPlayed line to a variable.
 function addP1Shadow() {
   document.getElementById("play-card").classList.add("player-1-shadow");
   document.getElementById("play-card").classList.remove("player-2-shadow");
