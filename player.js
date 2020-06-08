@@ -9,11 +9,9 @@ class Player {
     this.checkHands();
     if (currentGame.currentTurn === this.id) {
       currentGame.middleDeck.push(this.hand.pop());
-      console.log(currentGame.middleDeck[currentGame.middleDeck.length -1]);
       this.takeTurns();
       return "";
     } else {
-      console.log(`It is player ${currentGame.currentTurn}'s turn`)
       return `It is player ${currentGame.currentTurn}'s turn`;
     }
   }
@@ -30,7 +28,6 @@ class Player {
     } else if ((this.id === 2 && this.hand.length > 0) && (currentGame.player1.hand.length === 0)) {
       currentGame.currentTurn = 2;
     } else if (this.hand.length === 0) {
-      console.log("You are out of cards.")
       this.takeTurns();
     }
   }
@@ -45,6 +42,6 @@ class Player {
 
   saveWinsToStorage(playerNum) {
     var wins = JSON.stringify(this.wins);
-    localStorage.setItem(`${playerNum} Wins`, wins);
+    localStorage.setItem(`${playerNum}Wins`, wins);
   }
 }
