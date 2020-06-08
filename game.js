@@ -55,8 +55,7 @@ class Game {
   }
 
   slapNone() {
-    console.log(`There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`);
-    return `There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`
+    return `There's nothin' to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`
   }
 
   slapOne(playerNum) {
@@ -97,31 +96,25 @@ class Game {
 
   slapJack(playerNum) {
     this.takeThePile(playerNum);
-    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`);
     return `SLAPJACK! Player ${playerNum.id} takes the pile!`;
   }
 
   doubles(playerNum) {
     this.takeThePile(playerNum);
-    console.log(`DOUBLES! Player ${playerNum.id} takes the pile!`);
     return `DOUBLES! Player ${playerNum.id} takes the pile!`;
   }
 
   sandwich(playerNum) {
     this.takeThePile(playerNum);
-    console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
     return `SANDWICH! Player ${playerNum.id} takes the pile!`;
   }
 
   invalidSlap(playerNum) {
     if (playerNum.id === 1) {
       this.player2.hand.unshift(this.player1.hand.pop());
-      console.log(`BAD SLAP! Player 1 forfeits a card to Player 2!`);
       return `BAD SLAP! Player 1 forfeits a card to Player 2!`;
-    }
-    if (playerNum.id === 2) {
+    } else if (playerNum.id === 2) {
       this.player1.hand.unshift(this.player2.hand.pop());
-      console.log(`BAD SLAP! Player 2 forfeits a card to Player 1!`)
       return `BAD SLAP! Player 2 forfeits a card to Player 1!`;
     }
   }
@@ -159,19 +152,16 @@ class Game {
 
   closeCall(playerNum) {
     this.takeThePile(playerNum);
-    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
     return `SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`;
   }
 
   youLose(playerNum) {
     if (playerNum.id === 1) {
       this.player2.wins++;
-      console.log("BAD SLAP! Player 2 wins the game!");
       this.player2.saveWinsToStorage(`player2`);
       return "BAD SLAP! Player 2 wins the game!";
     } else if (playerNum.id === 2) {
       this.player1.wins++;
-      console.log("BAD SLAP! Player 1 wins the game!");
       this.player1.saveWinsToStorage(`player1`);
       return "BAD SLAP! Player 1 wins the game!";
     }
@@ -179,7 +169,6 @@ class Game {
 
   youWin(playerNum) {
     playerNum.wins++;
-    console.log(`Player ${playerNum.id} wins the game!`);
     playerNum.saveWinsToStorage(`player${playerNum.id}`);
     return `Player ${playerNum.id} wins the game!`;
   }
