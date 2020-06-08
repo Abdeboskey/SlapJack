@@ -36,6 +36,10 @@ main {
   justify-content: space-around;
 }
 
+section {
+  width: 18vw;
+}
+
 img {
   object-fit: cover;
   height: 26.75vw;
