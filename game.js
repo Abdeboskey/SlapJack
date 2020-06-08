@@ -54,27 +54,6 @@ class Game {
     }
   }
 
-  endGameplay(playerNum) {
-    if (this.middleDeck.length === 0) {
-      return this.slapNone();
-    } else {
-      return this.slapSuddenDeath(playerNum);
-    }
-  }
-
-  slapSuddenDeath(playerNum) {
-    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
-    if (playerNum.hand.length === 0 && topCard === "ck") {
-      return this.closeCall(playerNum);
-    } else if (playerNum.hand.length === 0 && topCard !== "ck") {
-      return this.youLose(playerNum);
-    } else if (playerNum.hand.length > 0 && topCard === "ck") {
-      return this.youWin(playerNum);
-    } else if (playerNum.hand.length > 0 && topCard !== "ck") {
-      return this.invalidSlap(playerNum);
-    }
-  }
-
   slapNone() {
     console.log(`There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`);
     return `There's nothin to slap! It is player ${currentGame.currentTurn}'s turn to play a card.`
@@ -116,41 +95,10 @@ class Game {
     }
   }
 
-  youWin(playerNum) {
-    playerNum.wins++;
-    console.log(`Player ${playerNum.id} wins the game!`);
-    playerNum.saveWinsToStorage(`player${playerNum.id}`);
-    return `Player ${playerNum.id} wins the game!`;
-  }
-
-  youLose(playerNum) {
-    if (playerNum.id === 1) {
-      this.player2.wins++;
-      console.log("BAD SLAP! Player 2 wins the game!");
-      this.player2.saveWinsToStorage(`player2`);
-      return "BAD SLAP! Player 2 wins the game!";
-    } else if (playerNum.id === 2) {
-      this.player1.wins++;
-      console.log("BAD SLAP! Player 1 wins the game!");
-      this.player1.saveWinsToStorage(`player1`);
-      return "BAD SLAP! Player 1 wins the game!";
-    }
-  }
-
-  closeCall(playerNum) {
+  slapJack(playerNum) {
     this.takeThePile(playerNum);
-    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
-    return `SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`;
-  }
-
-  suddenDeath() {
-    if (this.player1.hand.length === 0 || this.player2.hand.length === 0) {return true};
-  }
-
-  sandwich(playerNum) {
-    this.takeThePile(playerNum);
-    console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
-    return `SANDWICH! Player ${playerNum.id} takes the pile!`;
+    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`);
+    return `SLAPJACK! Player ${playerNum.id} takes the pile!`;
   }
 
   doubles(playerNum) {
@@ -159,10 +107,10 @@ class Game {
     return `DOUBLES! Player ${playerNum.id} takes the pile!`;
   }
 
-  slapJack(playerNum) {
+  sandwich(playerNum) {
     this.takeThePile(playerNum);
-    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile!`);
-    return `SLAPJACK! Player ${playerNum.id} takes the pile!`;
+    console.log(`SANDWICH! Player ${playerNum.id} takes the pile!`);
+    return `SANDWICH! Player ${playerNum.id} takes the pile!`;
   }
 
   invalidSlap(playerNum) {
@@ -182,5 +130,57 @@ class Game {
     playerNum.hand.push(...this.middleDeck);
     this.middleDeck = [];
     this.shuffle(playerNum.hand);
+  }
+
+  suddenDeath() {
+    if (this.player1.hand.length === 0 || this.player2.hand.length === 0) {return true};
+  }
+
+  endGameplay(playerNum) {
+    if (this.middleDeck.length === 0) {
+      return this.slapNone();
+    } else {
+      return this.slapSuddenDeath(playerNum);
+    }
+  }
+
+  slapSuddenDeath(playerNum) {
+    var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
+    if (playerNum.hand.length === 0 && topCard === "ck") {
+      return this.closeCall(playerNum);
+    } else if (playerNum.hand.length === 0 && topCard !== "ck") {
+      return this.youLose(playerNum);
+    } else if (playerNum.hand.length > 0 && topCard === "ck") {
+      return this.youWin(playerNum);
+    } else if (playerNum.hand.length > 0 && topCard !== "ck") {
+      return this.invalidSlap(playerNum);
+    }
+  }
+
+  closeCall(playerNum) {
+    this.takeThePile(playerNum);
+    console.log(`SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`);
+    return `SLAPJACK! Player ${playerNum.id} takes the pile! You're back in the game!`;
+  }
+
+  youLose(playerNum) {
+    if (playerNum.id === 1) {
+      this.player2.wins++;
+      console.log("BAD SLAP! Player 2 wins the game!");
+      this.player2.saveWinsToStorage(`player2`);
+      return "BAD SLAP! Player 2 wins the game!";
+    } else if (playerNum.id === 2) {
+      this.player1.wins++;
+      console.log("BAD SLAP! Player 1 wins the game!");
+      this.player1.saveWinsToStorage(`player1`);
+      return "BAD SLAP! Player 1 wins the game!";
+    }
+  }
+
+  youWin(playerNum) {
+    playerNum.wins++;
+    console.log(`Player ${playerNum.id} wins the game!`);
+    playerNum.saveWinsToStorage(`player${playerNum.id}`);
+    return `Player ${playerNum.id} wins the game!`;
   }
 }
