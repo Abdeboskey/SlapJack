@@ -41,23 +41,23 @@ function gameOver() {
 }
 
 function getFromStorage() {
-  
+
 }
 
 function player1Play() {
   gameplayMessage.innerText = currentGame.player1.playCard();
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
-  showElement("middle-deck");
+  showElement("play-card");
   addP1Shadow();
-  if (currentGame.middleDeck.length === 0) {toggleElement("middle-deck")};
+  if (currentGame.middleDeck.length === 0) {toggleElement("play-card")};
 }
 
 function player2Play() {
   gameplayMessage.innerText = currentGame.player2.playCard();
   cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
-  showElement("middle-deck");
+  showElement("play-card");
   addP2Shadow();
-  if (currentGame.middleDeck.length === 0) {toggleElement("middle-deck")};
+  if (currentGame.middleDeck.length === 0) {toggleElement("play-card")};
 }
 
 function addP1Shadow() {
@@ -70,10 +70,10 @@ function addP2Shadow() {
   document.getElementById("play-card").classList.remove("player-1-shadow");
 }
 
-function toggleElement(className) {
-  document.querySelector(`.${className}`).classList.toggle("hidden");
+function toggleElement(idName) {
+  document.getElementById(`${idName}`).classList.toggle("hidden");
 }
 
-function showElement(className) {
-  document.querySelector(`.${className}`).classList.remove("hidden");
+function showElement(idName) {
+  document.getElementById(`${idName}`).classList.remove("hidden");
 }
