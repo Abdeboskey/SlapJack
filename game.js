@@ -37,7 +37,7 @@ class Game {
   slapCard(playerNum) {
     if (this.suddenDeath()) {
       return this.endGameplay(playerNum);
-    } else if (playerNum.hand.length > 0) {
+    } else if (playerNum.hand.length) {
       return this.regularGameplay(playerNum);
     }
   }
@@ -173,3 +173,6 @@ class Game {
     return `Player ${playerNum.id} wins the game!`;
   }
 }
+
+// TO DO:
+// refactor all condtionals that can evaluate to binary like line 40

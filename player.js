@@ -23,15 +23,15 @@ class Player {
     } else if ((currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) && (currentGame.currentTurn === 1)) {
       currentGame.takeThePile(currentGame.player2);
       currentGame.currentTurn = 2;
-    } else if ((this.id === 1 && this.hand.length > 0) && (currentGame.player2.hand.length === 0)) {
+    } else if ((this.id === 1 && this.hand.length) && (currentGame.player2.hand.length === 0)) {
       currentGame.currentTurn = 1;
-    } else if ((this.id === 2 && this.hand.length > 0) && (currentGame.player1.hand.length === 0)) {
+    } else if ((this.id === 2 && this.hand.length) && (currentGame.player1.hand.length === 0)) {
       currentGame.currentTurn = 2;
     } else if (this.hand.length === 0) {
       this.takeTurns();
     }
   }
-
+  // Refactor all above conditionals that evaluate to binary
   takeTurns() {
     if (this.id === 1) {
       currentGame.currentTurn = 2;
