@@ -38,23 +38,34 @@ function whosTurn(pNum) {
 
 function player1Play() {
   gameplayMessage.innerText = "";
-  if (currentGame.player1.hand.length > 0) {addP1Shadow()};
+  var hasCards = currentGame.player1.hand.length;
+  if (hasCards) {addP1Shadow()};
   gameplayMessage.innerText = currentGame.player1.playCard();
-  cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
-  showElement("play-card");
-  checkDeck();
+  checkForShowCard();
 }
 
 function player2Play() {
   gameplayMessage.innerText = "";
-  if (currentGame.player2.hand.length > 0) {addP2Shadow()};
+  var hasCards = currentGame.player2.hand.length; // function needAShadow()
+  if (hasCards) {addP2Shadow()};
   gameplayMessage.innerText = currentGame.player2.playCard();
-  cardPlayed.src = `assets/${currentGame.middleDeck[currentGame.middleDeck.length -1]}.png`;
-  showElement("play-card");
-  checkDeck();
+  checkForShowCard();
 }
-// Can both the above and below functions be refactored? I think they can.....
-// Perhaps just bind that cardPlayed line to a variable.
+//// TO DO
+// That hasCards trick is dope. do it wherever a conditional evaluates to truthy or falsey.
+
+function checkForShowCard() { //showCard()
+  var cardShowing = currentGame.middleDeck[currentGame.middleDeck.length -1];
+  if (!cardShowing) {
+    cardPlayed.src = "";
+    hideElement("play-card");
+  } else {
+    cardPlayed.src = `assets/${cardShowing}.png`;
+    showElement("play-card");
+  }
+}
+//// Question:
+// Can the above be refactored to take a param?
 function addP1Shadow() {
   document.getElementById("play-card").classList.add("player-1-shadow");
   document.getElementById("play-card").classList.remove("player-2-shadow");
@@ -83,15 +94,9 @@ function takeASecond() {
 
 function afterSlap() {
   window.addEventListener("keydown", whichKey);
-  checkDeck();
+  checkForShowCard();
   if (!gameplayMessage.innerText.includes("wins the game")) {
     gameplayMessage.innerText += `\nPlayer ${currentGame.currentTurn}, it is your turn`;
-  }
-}
-
-function checkDeck() {
-  if (currentGame.middleDeck.length === 0) {
-    hideElement("play-card");
   }
 }
 
