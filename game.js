@@ -43,7 +43,7 @@ class Game {
   }
 
   regularGameplay(playerNum) {
-    if (this.middleDeck.length === 0) {
+    if (!this.middleDeck.length) {
       return this.slapNone();
     } else if (this.middleDeck.length === 1) {
       return this.slapOne(playerNum);
@@ -170,7 +170,7 @@ class Game {
   youWin(playerNum) {
     playerNum.wins++;
     playerNum.saveWinsToStorage(`player${playerNum.id}`);
-    return `Player ${playerNum.id} wins the game!`;
+    return `SLAPJACK! Player ${playerNum.id} wins the game!`;
   }
 }
 
