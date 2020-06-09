@@ -26,16 +26,6 @@ function whichKey(event) {
   }
 }
 
-function whosTurn(pNum) {
-  if (currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) {
-    gameplayMessage.innerText = `Player ${pNum}, you ran out of cards.\nTake the pile Player ${pNum}, it is your turn again`;
-  } else if (currentGame.player1.hand.length === 0) {
-    gameplayMessage.innerText = "Player 1, you are out of cards. Only a Jack will save you now!\nPlayer 2, it is your turn";
-  } else if (currentGame.player2.hand.length === 0) {
-    gameplayMessage.innerText = "Player 2, you are out of cards. Only a Jack will save you now!\nPlayer 1, it is your turn";
-  }
-}
-
 function player1Play() {
   gameplayMessage.innerText = "";
   var hasCards = currentGame.player1.hand.length;
@@ -76,8 +66,22 @@ function addP2Shadow() {
   document.getElementById("play-card").classList.remove("player-1-shadow");
 }
 
+function hideElement(idName) {
+  document.getElementById(`${idName}`).classList.add("hidden");
+}
+
 function showElement(idName) {
   document.getElementById(`${idName}`).classList.remove("hidden");
+}
+
+function whosTurn(pNum) {
+  if (currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) {
+    gameplayMessage.innerText = `Player ${pNum}, you ran out of cards.\nTake the pile Player ${pNum}, it is your turn again`;
+  } else if (currentGame.player1.hand.length === 0) {
+    gameplayMessage.innerText = "Player 1, you are out of cards. Only a Jack will save you now!\nPlayer 2, it is your turn";
+  } else if (currentGame.player2.hand.length === 0) {
+    gameplayMessage.innerText = "Player 2, you are out of cards. Only a Jack will save you now!\nPlayer 1, it is your turn";
+  }
 }
 
 function takeASecond() {
@@ -100,9 +104,6 @@ function afterSlap() {
   }
 }
 
-function hideElement(idName) {
-  document.getElementById(`${idName}`).classList.add("hidden");
-}
 
 function isItOver() {
   if (gameplayMessage.innerText.includes("wins the game")) {
