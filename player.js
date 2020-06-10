@@ -31,7 +31,7 @@ class Player {
       this.takeTurns();
     }
   }
-  // Refactor all above conditionals that evaluate to binary
+
   takeTurns() {
     if (this.id === 1) {
       currentGame.currentTurn = 2;
