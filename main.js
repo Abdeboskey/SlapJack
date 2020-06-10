@@ -26,16 +26,6 @@ function whichKey(event) {
   }
 }
 
-function whosTurn(pNum) {
-  if (currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) {
-    gameplayMessage.innerText = `Player ${pNum}, you ran out of cards.\nTake the pile Player ${pNum}, it is your turn again`;
-  } else if (currentGame.player1.hand.length === 0) {
-    gameplayMessage.innerText = "Player 1, you are out of cards. Only a Jack will save you now!\nPlayer 2, it is your turn";
-  } else if (currentGame.player2.hand.length === 0) {
-    gameplayMessage.innerText = "Player 2, you are out of cards. Only a Jack will save you now!\nPlayer 1, it is your turn";
-  }
-}
-
 function player1Play() {
   gameplayMessage.innerText = "";
   var hasCards = currentGame.player1.hand.length;
@@ -46,15 +36,13 @@ function player1Play() {
 
 function player2Play() {
   gameplayMessage.innerText = "";
-  var hasCards = currentGame.player2.hand.length; // function needAShadow()
+  var hasCards = currentGame.player2.hand.length;
   if (hasCards) {addP2Shadow()};
   gameplayMessage.innerText = currentGame.player2.playCard();
   checkForShowCard();
 }
-//// TO DO
-// That hasCards trick is dope. do it wherever a conditional evaluates to truthy or falsey.
 
-function checkForShowCard() { //showCard()
+function checkForShowCard() {
   var cardShowing = currentGame.middleDeck[currentGame.middleDeck.length -1];
   if (!cardShowing) {
     cardPlayed.src = "";
@@ -64,8 +52,7 @@ function checkForShowCard() { //showCard()
     showElement("play-card");
   }
 }
-//// Question:
-// Can the above be refactored to take a param?
+
 function addP1Shadow() {
   document.getElementById("play-card").classList.add("player-1-shadow");
   document.getElementById("play-card").classList.remove("player-2-shadow");
@@ -76,8 +63,22 @@ function addP2Shadow() {
   document.getElementById("play-card").classList.remove("player-1-shadow");
 }
 
+function hideElement(idName) {
+  document.getElementById(`${idName}`).classList.add("hidden");
+}
+
 function showElement(idName) {
   document.getElementById(`${idName}`).classList.remove("hidden");
+}
+
+function whosTurn(pNum) {
+  if (currentGame.player1.hand.length === 0 && currentGame.player2.hand.length === 0) {
+    gameplayMessage.innerText = `Player ${pNum}, you ran out of cards.\nTake the pile Player ${pNum}, it is your turn again`;
+  } else if (currentGame.player1.hand.length === 0) {
+    gameplayMessage.innerText = "Player 1, you are out of cards. Only a Jack will save you now!\nPlayer 2, it is your turn";
+  } else if (currentGame.player2.hand.length === 0) {
+    gameplayMessage.innerText = "Player 2, you are out of cards. Only a Jack will save you now!\nPlayer 1, it is your turn";
+  }
 }
 
 function takeASecond() {
@@ -100,9 +101,6 @@ function afterSlap() {
   }
 }
 
-function hideElement(idName) {
-  document.getElementById(`${idName}`).classList.add("hidden");
-}
 
 function isItOver() {
   if (gameplayMessage.innerText.includes("wins the game")) {
@@ -171,4 +169,3 @@ function getPlayer2Wins() {
     currentGame.player2.wins = winningStreak;
   }
 }
-// Can you refactor these two above?

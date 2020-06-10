@@ -43,7 +43,7 @@ class Game {
   }
 
   regularGameplay(playerNum) {
-    if (this.middleDeck.length === 0) {
+    if (!this.middleDeck.length) {
       return this.slapNone();
     } else if (this.middleDeck.length === 1) {
       return this.slapOne(playerNum);
@@ -126,11 +126,11 @@ class Game {
   }
 
   suddenDeath() {
-    if (this.player1.hand.length === 0 || this.player2.hand.length === 0) {return true};
+    if (!this.player1.hand.length || !this.player2.hand.length) {return true};
   }
 
   endGameplay(playerNum) {
-    if (this.middleDeck.length === 0) {
+    if (!this.middleDeck.length) {
       return this.slapNone();
     } else {
       return this.slapSuddenDeath(playerNum);
@@ -139,13 +139,13 @@ class Game {
 
   slapSuddenDeath(playerNum) {
     var topCard = this.middleDeck[this.middleDeck.length -1].slice(-2);
-    if (playerNum.hand.length === 0 && topCard === "ck") {
+    if (!playerNum.hand.length && topCard === "ck") {
       return this.closeCall(playerNum);
-    } else if (playerNum.hand.length === 0 && topCard !== "ck") {
+    } else if (!playerNum.hand.length && topCard !== "ck") {
       return this.youLose(playerNum);
-    } else if (playerNum.hand.length > 0 && topCard === "ck") {
+    } else if (playerNum.hand.length && topCard === "ck") {
       return this.youWin(playerNum);
-    } else if (playerNum.hand.length > 0 && topCard !== "ck") {
+    } else if (playerNum.hand.length && topCard !== "ck") {
       return this.invalidSlap(playerNum);
     }
   }
@@ -170,9 +170,6 @@ class Game {
   youWin(playerNum) {
     playerNum.wins++;
     playerNum.saveWinsToStorage(`player${playerNum.id}`);
-    return `Player ${playerNum.id} wins the game!`;
+    return `SLAPJACK! Player ${playerNum.id} wins the game!`;
   }
 }
-
-// TO DO:
-// refactor all condtionals that can evaluate to binary like line 40

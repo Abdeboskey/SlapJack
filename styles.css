@@ -10,10 +10,10 @@ body {
 }
 
 .celebrate {
-  animation: colorrr 10s infinite
+  animation: colorrrs 10s infinite
   }
 
-  @keyframes colorrr {
+  @keyframes colorrrs {
   0% {
    filter: hue-rotate(0deg)
   }
