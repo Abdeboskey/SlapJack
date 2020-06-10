@@ -45,15 +45,13 @@ is played. If a player slaps the middle deck when any of these three conditions 
 
 * When the page is loaded, the deck of 52 cards is shuffled 3 times and split evenly between the two players. A message is displayed that defines the controls for each player, and prompts Player 1 to start the game by playing a card!
 
-![Initial instructions on pageload]()
-
 * When a player plays a card, the instructions disappear and the card is displayed in the central pile. The card showing always has a shadow that is the same color as the player's deck who played it, to help keep track of who played what and who's turn it is next. If a player tries to play a card out of turn, a gameplay message gently reminds the players who's turn it is.
 
-![Alternating cards and displaying current turn reminder]()
+![Instructions, Alternating cards and displaying current turn reminder](assets/gifs/instructions_turn_reminder.gif)
 
 * If a player tries to slap when no cards are present, a message is displayed that informs the player that there is "nothin' to slap" and then reminds the players who's turn it is to play a card.
 
-![There's nothin' to slap! gameplay message]()
+![There's nothin' to slap! gameplay message](assets/gif/nothin_to_slap)
 
 * If a player slaps a Jack, Doubles or a Sandwich, a corresponding message is displayed, and the game pauses for one second, and all player controls are disabled so that the message persists even if both players try to slap the same card. After one second, controls are re-enabled, the middle deck disappears and an additional message displays reminding the players who's turn it is to play a card. The central pile is shuffled into the slapper's hand and gameplay resumes.
 
@@ -91,7 +89,7 @@ is played. If a player slaps the middle deck when any of these three conditions 
 
 ![Final stage Bad Slap message]()
 
-* When the page is refreshed, the wins are retrieved from localStorage and the Win displays are updated on the page. 
+* When the page is refreshed, the wins are retrieved from localStorage and the Win displays are updated on the page.
 
 ## Challenges/Wins
 
